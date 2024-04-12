@@ -69,6 +69,6 @@ For the full training pipeline - refer to ipynb file
 ![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-aug-map.png)
 ## Results
 
-Trained model path is trained_models/vit_pretrained/model/model-val-1005.pth
-Prediction scores are in trained_models/vit_pretrained/results/scores_wth_gt-1005.csv
+* Trained model path is trained_models/vit_pretrained/model/model-val-1005.pth
+* Prediction scores are in trained_models/vit_pretrained/results/scores_wth_gt-1005.csv
 
