@@ -28,5 +28,9 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 
 ## Performance
 
-
+### ViT Tiny pretrained on ImageNet
+#### Loss
+![Loss vs Epoch pretrained transformer](/images/vit-pretrained-loss.png)
+#### mAP
+![Loss vs Epoch pretrained transformer](/images/vit-pretrained-loss.png)
 
