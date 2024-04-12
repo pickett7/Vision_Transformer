@@ -11,5 +11,5 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 
 ## Training
 
--Vision Transformer is trained using Pytorch Library
--gh
+* Vision Transformer is trained using Pytorch Library
+* gh
