@@ -37,5 +37,7 @@ For the full training pipeline - refer to ipynb file
 ![Loss vs Epoch pretrained transformer](/images/vit-pretrained-map.png)
 
 ## Results
-!(trained_models/vit_pretrained)
+
+Trained model path is trained_models/vit_pretrained/model/model-val-1005.pth
+Prediction scores are in trained_models/vit_pretrained/results/scores_wth_gt-1005.csv
 
