@@ -44,7 +44,8 @@ For the full training pipeline - refer to ipynb file
                )
                RandomHorizontalFlip(p=0.25)
                RandomRotation(degrees=[-25.0, 25.0], interpolation=nearest, expand=False, fill=0)`
-
+#### mAP on Test 
+0.548
 #### Loss
 ![Loss vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-loss.png)
 #### mAP
@@ -60,6 +61,8 @@ For the full training pipeline - refer to ipynb file
                GaussianBlur(kernel_size=(7, 13), sigma=(0.1, 2.0))
                )
                ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)`
+#### mAP on Test 
+0.548
 #### Loss
 ![Loss vs Epoch scratch no aug transformer](images/vit-scratch-aug-loss.png)
 #### mAP
