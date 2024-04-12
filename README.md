@@ -38,6 +38,12 @@ For the full training pipeline - refer to ipynb file
 
 ### ViT Tiny trained from scratch
 #### Augmentation
+              `RandomChoice(
+               ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)
+               RandomGrayscale(p=0.25)
+               )
+               RandomHorizontalFlip(p=0.25)
+               RandomRotation(degrees=[-25.0, 25.0], interpolation=nearest, expand=False, fill=0)`
 
 #### Loss
 ![Loss vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-loss.png)
