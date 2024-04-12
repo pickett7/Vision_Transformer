@@ -12,4 +12,21 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 ## Training
 
 * Vision Transformer is trained using Pytorch Library
-* gh
+* Pytorch library `torchvision.datasets.VOCDetection` is used as Dataset for the DataLoader
+* Loss criteria : `BCEWithLogitsLoss`
+* Evaluation : Mean Average Prediction of labels
+
+| Hyperparameter | Values - Trained from Scratch | Values - Pretrained from ImageNet |
+| ------------- | ------------- | ------------- |
+| Input Image Size  | 224 x 224  | 224 x 224  |
+| Batch size  | 20  | 20  |
+| Epochs  | 50  | 15  |
+| Optimizer  | SGD with momentum  | SGD with momentum  |
+| Learning rate  | 1e-3 | 5e-5  |
+| Scheduler  | StepLR  | StepLR  |
+| Momentum  | 0.9  | 0.9  |
+
+## Performance
+
+
+
