@@ -21,7 +21,7 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 | Input Image Size  | 224 x 224  | 224 x 224  |
 | Batch size  | 20  | 20  |
 | Epochs  | 50  | 15  |
-| Optimizer  | SGD with momentum  | SGD with momentum  |
+| Optimizer  | SGD with momentum(gamma - 0.3  | SGD with momentum / gamma - 0.3  |
 | Learning rate  | 1e-3 | 5e-5  |
 | Scheduler  | StepLR  | StepLR  |
 | Momentum  | 0.9  | 0.9  |
