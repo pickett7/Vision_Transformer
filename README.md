@@ -34,8 +34,30 @@ For the full training pipeline - refer to ipynb file
 #### Loss
 ![Loss vs Epoch pretrained transformer](/images/vit-pretrained-loss.png)
 #### mAP
-![Loss vs Epoch pretrained transformer](/images/vit-pretrained-map.png)
+![mAP vs Epoch pretrained transformer](/images/vit-pretrained-map.png)
 
+### ViT Tiny trained from scratch
+#### Augmentation
+
+#### Loss
+![Loss vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-loss.png)
+#### mAP
+![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-map.png)
+
+### ViT Tiny trained from scratch
+#### Augmentation
+              `RandomCrop(size=(224, 224), padding=4)
+               RandomHorizontalFlip(p=0.5)
+               RandomChoice(
+               RandomGrayscale(p=1.0)
+               RandomSolarize(threshold=60,p=1.0)
+               GaussianBlur(kernel_size=(7, 13), sigma=(0.1, 2.0))
+               )
+               ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)`
+#### Loss
+![Loss vs Epoch scratch no aug transformer](images/vit-scratch-aug-loss.png)
+#### mAP
+![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-aug-map.png)
 ## Results
 
 Trained model path is trained_models/vit_pretrained/model/model-val-1005.pth
