@@ -8,3 +8,8 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
                      'cow', 'diningtable', 'dog', 'horse',
                      'motorbike', 'person', 'pottedplant',
                      'sheep', 'sofa', 'train', 'tvmonitor'
+
+## Training
+
+-Vision Transformer is trained using Pytorch Library
+-gh
