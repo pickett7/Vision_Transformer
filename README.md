@@ -16,6 +16,8 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 * Loss criteria : `BCEWithLogitsLoss`
 * Evaluation : Mean Average Prediction of labels
 
+For the full training pipeline - refer to ipynb file
+
 | Hyperparameter | Values - Trained from Scratch | Values - Pretrained from ImageNet |
 | ------------- | ------------- | ------------- |
 | Input Image Size  | 224 x 224  | 224 x 224  |
@@ -28,5 +30,9 @@ There are 20 Object Categories:  'aeroplane', 'bicycle', 'bird', 'boat',
 
 ## Performance
 
-
+### ViT Tiny pretrained on ImageNet
+#### Loss
+![Loss vs Epoch pretrained transformer](/images/vit-pretrained-loss.png)
+#### mAP
+![Loss vs Epoch pretrained transformer](/images/vit-pretrained-map.png)
 
