@@ -36,3 +36,6 @@ For the full training pipeline - refer to ipynb file
 #### mAP
 ![Loss vs Epoch pretrained transformer](/images/vit-pretrained-map.png)
 
+## Results
+!(trained_models/vit_pretrained)
+
