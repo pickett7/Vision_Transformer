@@ -61,17 +61,18 @@ For the full training pipeline - refer to ipynb file
                GaussianBlur(kernel_size=(7, 13), sigma=(0.1, 2.0))
                )
                ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)`
-#### mAP on Test 
-0.548
+
 #### Loss (50 Epochs)
-![Loss vs Epoch scratch aug transformer](images/vit-scratch-aug-loss.png) 
+![Loss scratch aug]() 
 
 #### mAP (50 epochs)
-![mAP vs Epoch scratch aug transformer](/images/vit-scratch-aug-map.png) 
+![mAP scratch aug](/images/vit-scratch-aug-map.png) 
 
 #### Loss and mAP (100 epochs) 
-- Model generalizes well when trained with 3-Augment proposed in _DeiT III: Revenge of the ViT
-![Loss vs Epoch scratch aug transformer 100 epochs](images/vit-scratch-aug-loss-100-epochs.png) ![mAP vs Epoch scratch aug transformer 100 epochs](images/vit-scratch-aug-map-100-epochs.png)
+- Model generalizes well when trained with 3-Augment proposed in DeiT III: Revenge of the ViT
+
+![loss aug 100 epochs](images/vit-scratch-aug-loss-100-epochs.png)
+![mAP aug 100 epochs](images/vit-scratch-aug-map-100-epochs.png)
 
 ## Results
 
