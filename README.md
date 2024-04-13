@@ -63,7 +63,7 @@ For the full training pipeline - refer to ipynb file
                ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)`
 
 #### Loss (50 Epochs)
-![Loss scratch aug]() 
+![Loss scratch aug](images/vit-scratch-aug-loss.png) 
 
 #### mAP (50 epochs)
 ![mAP scratch aug](/images/vit-scratch-aug-map.png) 
