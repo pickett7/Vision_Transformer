@@ -5,24 +5,6 @@ from .layers.patches import CreatePatches
 from .layers.transformer import Transformer
 from ..utils import load_weights
 
-# Default values for ViT_B_16 from the paper
-# https://arxiv.org/pdf/2010.11929v2.pdf
-"""
-IMG_SIZE = 224
-NUM_CLASSES = 1000
-EMBED_DIM = 768
-MLP_RATIO = 4 # Muliplies with `EMBED_DIM` to give hidden_dim (3072 for ViT_B_16).
-CHANNELS = 3
-PATCH_SIZE = 16
-NUM_HEADS = 12
-MLP_IN_FEATURES = 768 # Equals to `EMBED_DIM`.
-MLP_OUT_FEATURES = 768 # # Equals to `EMBED_DIM`.
-TRANSFORMER_DEPTH = 12
-DROPOUT = 0.0
-EMB_DROPOUT = 0.0
-DIM_HEAD = 64
-"""
-
 class ViT(nn.Module):
     def __init__(
         self,
@@ -105,82 +87,6 @@ class ViT(nn.Module):
         x = x[:, 0]
         return self.mlp_head(x)
 
-def vit_b_p16_224(
-    image_size=224,
-    num_classes=1000,
-    pretrained=False
-):
-    """
-    ViT-B/16 from https://arxiv.org/pdf/2010.11929v2.pdf.
-    Patch size = 16.
-    """
-    name = 'vit_b_p16_224'
-    model = ViT(
-        img_size=224, 
-        patch_size=16,
-        in_channels=3,
-        num_classes=1000,
-        embed_dim=768,
-        mlp_in=768,
-        mlp_ratio=4,
-        mlp_out=768,
-        depth=12,
-        num_heads=12,
-        drop_rate=0.0,
-        emb_drop_rate=0.0
-    )
-    if pretrained:
-        print(f"Loading {name} pretrained weights")
-        model = load_weights.load_pretrained_state_dict(model, name)
-    
-    # Initialize new head only of classes != 1000.
-    if num_classes != 1000:
-        print('Initializing new head')
-        model.mlp_head = nn.Linear(
-            in_features=model.mlp_head.in_features, 
-            out_features=num_classes, 
-            bias=True
-        )
-    return model
-
-def vit_b_p32_224(
-    image_size=224,
-    num_classes=1000,
-    pretrained=False
-):
-    """
-    ViT-B/32 from https://arxiv.org/pdf/2010.11929v2.pdf.
-    Patch size  = 32.
-    """
-    name = 'vit_b_p32_224'
-    model =  ViT(
-        img_size=224, 
-        patch_size=32,
-        in_channels=3,
-        num_classes=1000,
-        embed_dim=768,
-        mlp_in=768,
-        mlp_ratio=4,
-        mlp_out=768,
-        depth=12,
-        num_heads=12,
-        drop_rate=0.0,
-        emb_drop_rate=0.0
-    )
-    if pretrained:
-        print(f"Loading {name} pretrained weights")
-        model = load_weights.load_pretrained_state_dict(model, name)
-
-    # Initialize new head only of classes != 1000.
-    if num_classes != 1000:
-        print('Initializing new head')
-        model.mlp_head = nn.Linear(
-            in_features=model.mlp_head.in_features, 
-            out_features=num_classes, 
-            bias=True
-        )
-    return model
-
 def vit_ti_p16_224(
     image_size=224,
     num_classes=1000,
@@ -201,41 +107,6 @@ def vit_ti_p16_224(
         drop_rate=0.0,
         emb_drop_rate=0.0
     )
-    if pretrained:
-        print(f"Loading {name} pretrained weights")
-        model = load_weights.load_pretrained_state_dict(model, name)
-
-    # Initialize new head only of classes != 1000.
-    if num_classes != 1000:
-        print('Initializing new head')
-        model.mlp_head = nn.Linear(
-            in_features=model.mlp_head.in_features, 
-            out_features=num_classes, 
-            bias=True
-        )
-    return model
-
-def vit_ti_p16_384(
-    image_size=384,
-    num_classes=20,
-    pretrained=False
-):
-    name = 'vit_ti_p16_384'
-    model = ViT(
-        img_size=384, 
-        patch_size=16,
-        in_channels=3,
-        num_classes=20,
-        embed_dim=192,
-        mlp_in=192,
-        mlp_ratio=4,
-        mlp_out=192,
-        depth=12,
-        num_heads=3,
-        drop_rate=0.0,
-        emb_drop_rate=0.0
-    )
-    print(model)
     if pretrained:
         print(f"Loading {name} pretrained weights")
         model = load_weights.load_pretrained_state_dict(model, name)
