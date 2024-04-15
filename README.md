@@ -44,15 +44,14 @@ For the full training pipeline - refer to ipynb file
                )
                RandomHorizontalFlip(p=0.25)
                RandomRotation(degrees=[-25.0, 25.0], interpolation=nearest, expand=False, fill=0)`
-#### mAP on Test 
-0.548
+
 #### Loss
 ![Loss vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-loss.png)
 #### mAP
 ![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-map.png)
 
 ### ViT Tiny trained from scratch
-#### Augmentation
+#### 3 Augmentation ([DeiT III: Revenge of the ViT](https://arxiv.org/abs/2204.07118)
               `RandomCrop(size=(224, 224), padding=4)
                RandomHorizontalFlip(p=0.5)
                RandomChoice(
@@ -61,18 +60,20 @@ For the full training pipeline - refer to ipynb file
                GaussianBlur(kernel_size=(7, 13), sigma=(0.1, 2.0))
                )
                ColorJitter(brightness=(0.8, 1.2), contrast=None, saturation=None, hue=None)`
-#### mAP on Test 
-0.548
+
 #### Loss (50 Epochs)
-![Loss vs Epoch scratch aug transformer](images/vit-scratch-aug-loss.png) 
+![Loss scratch aug](images/vit-scratch-aug-loss.png) 
 
 #### mAP (50 epochs)
-![mAP vs Epoch scratch aug transformer](/images/vit-scratch-aug-map.png) 
+![mAP scratch aug](/images/vit-scratch-aug-map.png) 
 
 #### Loss and mAP (100 epochs) 
-- Model generalizes well when trained with 3-Augment proposed in _DeiT III: Revenge of the ViT
-![Loss vs Epoch scratch aug transformer 100 epochs](images/vit-scratch-aug-loss-100-epochs.png) ![mAP vs Epoch scratch aug transformer 100 epochs](images/vit-scratch-aug-map-100-epochs.png)
+- Model generalizes well when trained with 3-Augment
 
+![loss aug 100 epochs](images/vit-scratch-aug-loss-100-epochs.png)
+![mAP aug 100 epochs](images/vit-scratch-aug-map-100-epochs.png)
+#### mAP on Test 
+0.561
 ## Results
 
 * Trained model path is trained_models/vit_pretrained/model/model-val-1005.pth
