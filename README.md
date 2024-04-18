@@ -45,11 +45,13 @@ For the full training pipeline - refer to ipynb file
                RandomHorizontalFlip(p=0.25)
                RandomRotation(degrees=[-25.0, 25.0], interpolation=nearest, expand=False, fill=0)`
 
-#### Loss
+#### Loss (50 Epochs)
 ![Loss vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-loss.png)
-#### mAP
+#### mAP mAP (50 epochs)
 ![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-map.png)
-
+#### Loss and mAP (100 epochs) 
+![Loss vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-loss-100.png)
+![mAP vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-map-100.png)
 ### ViT Tiny trained from scratch
 #### 3 Augmentation ([DeiT III: Revenge of the ViT](https://arxiv.org/abs/2204.07118)
               `RandomCrop(size=(224, 224), padding=4)
