@@ -50,8 +50,8 @@ For the full training pipeline - refer to ipynb file
 #### mAP mAP (50 epochs)
 ![mAP vs Epoch scratch no aug transformer](/images/vit-scratch-no-aug-map.png)
 #### Loss and mAP (100 epochs) 
-![Loss vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-loss-100.png)
-![mAP vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-map-100.png)
+![Loss vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-loss-100.png) 
+![mAP vs Epoch scratch no aug 100 transformer](/images/vit-scratch-no-aug-map-100.png) 
 ### ViT Tiny trained from scratch
 #### 3 Augmentation ([DeiT III: Revenge of the ViT](https://arxiv.org/abs/2204.07118)
               `RandomCrop(size=(224, 224), padding=4)
@@ -72,8 +72,8 @@ For the full training pipeline - refer to ipynb file
 #### Loss and mAP (100 epochs) 
 - Model generalizes well when trained with 3-Augment
 
-![loss aug 100 epochs](images/vit-scratch-aug-loss-100-epochs.png)
-![mAP aug 100 epochs](images/vit-scratch-aug-map-100-epochs.png)
+![loss aug 100 epochs](images/vit-scratch-aug-loss-100-epochs.png) 
+![mAP aug 100 epochs](images/vit-scratch-aug-map-100-epochs.png) 
 #### mAP on Test 
 0.561
 ## Results
