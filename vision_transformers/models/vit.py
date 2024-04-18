@@ -51,8 +51,7 @@ class ViT(nn.Module):
         )
 
         self.ln = nn.LayerNorm(embed_dim, eps=1e-06)
-        self.latent = nn.Identity()
-
+        
         self.mlp_head = nn.Linear(embed_dim, num_classes)
 
         self.apply(self._init_weights)
@@ -81,9 +80,6 @@ class ViT(nn.Module):
         x = self.transformer(x)
        
         x = self.ln(x)
-  
-        x = self.latent(x)
-        
         x = x[:, 0]
         return self.mlp_head(x)
 
