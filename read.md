@@ -165,23 +165,41 @@ how would you determine the necessary quantity?
   #### Key Evaluation Metrics:
   #### Accuracy:
   **Definition:** The percentage of correctly identified activities (both suspicious and non-suspicious) out of the total activities.
+  
   **Importance:** While accuracy provides an overall measure of performance, it can be misleading in imbalanced datasets, where normal activities far outnumber suspicious ones.
+  
   **Example:** In a surveillance system, if 98% of activities are normal and only 2% are suspicious, a model could achieve 98% accuracy simply by classifying everything as normal, which isn’t helpful for detecting real threats.
+  
   #### Precision:
   **Definition:** The proportion of true positives (correctly identified suspicious activities) out of all predicted suspicious activities.
+  
   **Importance:** High precision ensures that most flagged events are genuinely suspicious, reducing false positives, which is crucial for preventing unnecessary interventions.
+  
   **Example:** In a retail store, a high-precision model would minimize false alarms by not flagging regular shoppers as potential thieves.
-  Precision = True Positives (TP) / (True Positives (TP) + False Positives (FP))
-  •	Recall:
-  o	Definition: Recall (or sensitivity) measures the proportion of actual suspicious activities that the model correctly identifies.
-  o	Importance: High recall ensures the system detects most suspicious activities, minimizing false negatives (missed suspicious activities).
-  o	Example: In a public space, high recall is vital for identifying threats like theft or violence, even at the cost of a few false positives.
-  Recall = True Positives (TP) / (True Positives (TP) + False Negatives (FN))
-  •	F1 Score:
-  o	Definition: The harmonic mean of precision and recall, providing a balanced measure of the model’s performance.
-  o	Importance: Since suspicious activity detection requires balancing precision and recall, the F1 score is crucial for assessing overall performance in real-world scenarios.
-  F1 Score = 2 × (Precision × Recall) / (Precision + Recall)
-  o	Example: A surveillance system with a high F1 score would efficiently detect most threats while minimizing false alerts.
+  
+         Precision = True Positives (TP) / (True Positives (TP) + False Positives (FP))
+  #### Recall:
+  **Definition:** Recall (or sensitivity) measures the proportion of actual suspicious activities that the model correctly identifies.
+  
+  **Importance:** High recall ensures the system detects the most suspicious activities, minimizing false negatives (missed suspicious activities).
+  
+  **Example:** In a public space, high recall is vital for identifying threats like theft or violence, even at the cost of a few false positives.
+  
+         Recall = True Positives (TP) / (True Positives (TP) + False Negatives (FN))
+  #### F1 Score:
+  **Definition:** The harmonic mean of precision and recall, providing a balanced measure of the model’s performance.
+  
+  **Importance:** Since suspicious activity detection requires balancing precision and recall, the F1 score is crucial for assessing overall performance in real-world scenarios.
+  
+         F1 Score = 2 × (Precision × Recall) / (Precision + Recall)
+  
+  **Example:** A surveillance system with a high F1 score would efficiently detect most threats while minimizing false alerts.
+
   Focusing on the F1 score provides a balanced view of the model’s ability to perform well across different types of errors, while precision and recall highlight specific strengths and weaknesses.
 
-
+#### References:
+1.  [Real-Time Human Action Recognition on Embedded Platforms](https://arxiv.org/abs/2409.05662)
+2.  [DEEP LEARNING APPROACH FOR SUSPICIOUS ACTIVITY DETECTION](https://www.jetir.org/papers/JETIR2302581.pdf)
+3.  [VadCLIP: Adapting Vision-Language Models for Weakly Supervised Video Anomaly Detection](https://arxiv.org/abs/2308.11681v3)
+4.  [Real-world Anomaly Detection in Surveillance Videos](https://arxiv.org/abs/1801.04264v3)
+5.  []()
