@@ -42,3 +42,53 @@ customer’s desired detector is not readily available.
 2.	[Improved Fine-Tuning by Better Leveraging Pre-Training Data](https://arxiv.org/abs/2111.12292)
 3.	[Training vs. Fine-tuning: What is the Difference?](https://encord.com/blog/training-vs-fine-tuning/)
 4.	[Fine-Tuning vs Full Training vs Training from Scratch](https://www.analyticsvidhya.com/blog/2024/06/fine-tuning-vs-full-training-vs-training-from-scratch/#:~:text=Training%20from%20scratch%20is%20flexible,particular%20tasks%20with%20limited%20data.)
+
+
+### Finding a Suitable Off-the-Shelf Model
+
+* Outline how you might approach the task of finding a suitable off-the-shelf model
+  architecture for the suspicious activity detection task. What criteria would you
+  consider to ensure the model can perform real-time detection on CCTV footage?
+
+  * To approach the task of finding a suitable off-the-shelf model architecture for suspicious activity detection, one could start by considering models designed for human action recognition (HAR). These models can be fine-tuned to meet the specific requirements of detecting suspicious activities.
+    
+    #### Identify the Task Requirements:
+    Identify the specific task. Suspicious activity is a broad category that includes various aspects such as crime detection, fall detection, and weapon detection. It is important to clarify the client's problem statement to proceed with the selection of the dataset and model.
+    
+    #### Identify the Hardware Requirements:
+    When selecting hardware for suspicious activity detection, it’s crucial to balance performance and runtime efficiency. High-performance HAR models typically require substantial computational resources and large amounts of RAM. However, for real-time surveillance scenarios, the model should be optimized to run efficiently on embedded devices. This ensures that the system can operate continuously and reliably in various environments without the need for extensive infrastructure.
+    
+    For high-performance requirements, GPUs or TPUs can be considered to handle the computational load. Since this is a real-time scenario, hardware specifically designed for the use case can be utilized. For example, for clients of VCA Technology, it’s important to consider hardware specifications such as CPU, GPU, and supported RAM of VCA servers or VCA AI cameras before choosing models. Other hardware options, like NVIDIA Jetson or Google Coral, can be considered if the use case demands their use.
+    
+    #### Model Selection Criteria:
+    
+    Effective processing of video input is crucial for recognizing temporally varying events, such as human actions. Therefore, models that extract spatiotemporal features from videos to identify action patterns are essential. The architecture we choose should be capable of modeling the temporal sequence along with spatial information.
+    
+    **Convolutional Neural Networks (CNNs):** CNNs are effective in modeling low- to mid-level features of image data and can generalize better than earlier handcrafted methods for action recognition, such as Histograms of Oriented Gradients (HOG), Histograms of Oriented Flow, and SIFT. Object detection models designed for low computational resources, like YOLOvX-tiny or MobileNetVx [4], can be used, but their application is mainly limited to detection. Specific modifications and custom additional layers are required to perform action classification.
+    
+    **Two-Stream CNN:** The two-stream CNN is a popular architecture for human action recognition in videos. This approach uses two separate streams to capture different types of information: spatial and temporal. The spatial stream processes the RGB frames of the video to capture appearance information, focusing on static features such as the background and objects in each frame [7]. A standard CNN, like VGG or ResNet, is typically used to extract these spatial features. The temporal stream processes optical flow between consecutive frames to capture motion, which is crucial for understanding actions.
+    
+    **3D CNNs:** Unlike 2D CNNs, which apply filters over spatial dimensions (height and width), 3D CNNs apply filters over three dimensions: height, width, and time. This allows the network to learn spatiotemporal features directly from the video frames [6]. Although 3D CNNs can outperform 2D CNNs and two-stream CNNs, they require a larger number of parameters to model both spatial and temporal features effectively, leading to higher computational costs, which can be a drawback for small embedded devices.
+    
+    **Long Short-Term Memory (LSTM) Networks:** LSTMs are a type of recurrent neural network (RNN) designed to capture temporal dependencies in sequential data. For action recognition, LSTMs process sequences of video frames to learn the temporal dynamics of actions. LSTM Fusion combines LSTMs with other models, such as CNNs, to leverage both spatial and temporal features. This typically involves a two-stream approach where a CNN extracts spatial features from individual frames, and an LSTM processes these features to capture temporal dynamics. LSTM fusion models generally outperform single-stream LSTM models by providing a more comprehensive understanding of the video data.
+    
+    **Transformer-Based Models:** Recently, transformer-based action recognition models that use self-attention mechanisms to capture temporal relationships among neighboring frames have been shown to outperform existing off-the-shelf models [6]. However, they require higher computational power. While these models excel in accuracy, their computational demands can be a challenge for real-time applications on embedded devices.
+    
+    **Trade-Off Between Real-Time Efficiency and Performance:**
+    In real-time scenarios, there is often a trade-off between efficiency and performance. Models that achieve higher accuracy, such as 3D CNNs or transformers, typically require more computational resources [6], which may not be suitable for devices with limited processing power. More efficient architectures like two-stream CNNs might offer better real-time performance but possibly at the expense of some accuracy. Striking the right balance between model performance and real-time efficiency is crucial, especially for embedded systems.
+    
+    However, advancements in hardware, such as the NVIDIA Jetson series, are making it increasingly feasible to deploy high-performance models, like transformers, on embedded devices with appropriate optimizations.
+    
+    **Recent Research for Real-Time Human Activity Detection:**
+    
+    Recent research on real-time human activity recognition on embedded devices has highlighted that latency bottlenecks have been due to the Optical Flow Extractor used in the pipeline of the two-stream HAR model [3]. They have introduced a new RT-HARE system that, unlike traditional methods relying on Optical Flow (OF) extraction, uses IMFE to directly extract motion features from raw video frames. IMFE leverages the parallel processing capabilities of the GPU and Deep Learning Accelerator (DLA) to enhance efficiency further. Integrated into the RT-HARE system, IMFE enables real-time human action recognition at 30 frames per second. Despite its efficiency, IMFE maintains high recognition accuracy, making it suitable for embedded applications.
+
+#### References:
+1. [VCA Servers](https://vcatechnology.com/products/vcaservers)
+2. [VCA AI Cameras](https://vcatechnology.com/products/ai-cameras)
+3. [Real-Time Human Action Recognition on Embedded Platforms](https://arxiv.org/abs/2409.05662)
+4. [Mobilenets: Efficient convolutional neural networks for mobile vision applications](https://arxiv.org/abs/1704.04861)
+5. [VideoMAE V2: Scaling Video Masked Autoencoders with Dual Masking](https://arxiv.org/abs/2303.16727)
+6. [Spatio-Temporal FAST 3D Convolutions for Human Action Recognition](https://arxiv.org/abs/1909.13474)
+7. [Two-stream convolutional networks for action recognition in videos](https://arxiv.org/abs/1406.2199)    
+
