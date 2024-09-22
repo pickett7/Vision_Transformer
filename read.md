@@ -90,5 +90,34 @@ customer’s desired detector is not readily available.
 4. [Mobilenets: Efficient convolutional neural networks for mobile vision applications](https://arxiv.org/abs/1704.04861)
 5. [VideoMAE V2: Scaling Video Masked Autoencoders with Dual Masking](https://arxiv.org/abs/2303.16727)
 6. [Spatio-Temporal FAST 3D Convolutions for Human Action Recognition](https://arxiv.org/abs/1909.13474)
-7. [Two-stream convolutional networks for action recognition in videos](https://arxiv.org/abs/1406.2199)    
+7. [Two-stream convolutional networks for action recognition in videos](https://arxiv.org/abs/1406.2199)
+
+### Creating a Training Dataset
+
+* Given that data to train the desired detector is not readily available, describe how you
+  would put together a training dataset of sufficient size to train an off-the-shelf deep
+  learning algorithm for suspicious activity detection.
+
+* What factors affect the amount of data required for training the detector, and 
+how would you determine the necessary quantity?
+  * Several factors influence the amount of data required to train a detector effectively, particularly for tasks like suspicious activity detection.
+
+    To ensure robustness and better generalization, a larger and more diverse dataset is typically recommended for suspicious activity recognition. A diverse dataset allows the model to learn a wider variety of patterns, reducing the likelihood of overfitting and improving its performance on new, unseen data.
+    
+    The factors that affect the amount of data required for training the detector include the complexity of the task, the variability of the training data, and the model’s capacity.
+    
+    **Task Complexity**
+    Suspicious activity detection is a complex task that requires the model to understand variations in human behaviour. This complexity necessitates more data to capture these variations effectively.
+    
+    **Model Requirements**
+    Complex models with higher capacity require a large amount of data to generalize well for suspicious activity detection. Deep learning models, in particular, tend to overfit on small datasets and thus need more data to improve their generalization. Simpler models can be trained on smaller datasets, but they typically offer less accuracy.
+    
+    **Data Distribution**
+    The quality of the data is crucial for training complex models. Data with limited diversity in lighting conditions and backgrounds can hinder the model’s ability to generalize to unknown environments. Improper classification and labelling of diverse data can lead to poor classification performance. An imbalance in class distribution can bias the model and reduce its accuracy.
+    
+    To determine the necessary quantity of data, we can initially train the models for action recognition using existing datasets like UCF101 or CASIA. If these datasets are insufficient, we can gradually increase the size by collecting more data or using synthetic data generation.
+    
+    **Evaluation**
+    Experimenting with different dataset sizes and cross-validating the models’ performance can help gauge whether the current data is sufficient or if more diversity and volume are needed.
+
 
