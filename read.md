@@ -202,4 +202,8 @@ how would you determine the necessary quantity?
 2.  [DEEP LEARNING APPROACH FOR SUSPICIOUS ACTIVITY DETECTION](https://www.jetir.org/papers/JETIR2302581.pdf)
 3.  [VadCLIP: Adapting Vision-Language Models for Weakly Supervised Video Anomaly Detection](https://arxiv.org/abs/2308.11681v3)
 4.  [Real-world Anomaly Detection in Surveillance Videos](https://arxiv.org/abs/1801.04264v3)
-5.  []()
+5.  [Weakly-supervised Video Anomaly Detection with Robust Temporal Feature Magnitude Learning](https://arxiv.org/abs/2101.10030v3)
+6.  [Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset](https://arxiv.org/abs/1705.07750v3)
+7.	[VideoMAE V2: Scaling Video Masked Autoencoders with Dual Masking](https://arxiv.org/abs/2303.16727v2)
+
+   
