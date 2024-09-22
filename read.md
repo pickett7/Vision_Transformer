@@ -120,4 +120,68 @@ how would you determine the necessary quantity?
     **Evaluation**
     Experimenting with different dataset sizes and cross-validating the models’ performance can help gauge whether the current data is sufficient or if more diversity and volume are needed.
 
+* Detail the processes you would use to source and label the data in the required
+  quantity for training the detector to operate effectively on real-time CCTV footage.
+  * To gather the data needed for training a detector to effectively analyze real-time CCTV footage, several strategies can be employed, keeping in mind the privacy and security concerns that come with surveillance footage.
+
+  First, we can leverage readily available open-source datasets that are suitable for CCTV applications. It’s important to ensure these datasets comply with privacy regulations and don’t involve any sensitive data that could be exposed during inference. Datasets like DCSAAS are ideal, and similar resources can be found on platforms like Kaggle. However, it is crucial to restrict data collection to fully open-source datasets to avoid legal and ethical issues.
+  
+  Additionally, if customers can provide footage from real-time scenarios sourced in-house, it would greatly enhance the dataset's relevance and accuracy. This real-world data can reflect specific environments and conditions that the detector will encounter.
+  
+  If in-house footage is not available, public video platforms like YouTube can be utilized to source videos relevant to the target actions or behaviours. This approach can supplement the dataset with diverse scenarios and activities, ensuring a broader understanding of potential suspicious behaviours.
+
+  For labeling the dataset, third-party labeling services can be used to streamline the process and reduce the manual effort involved in annotating actions. These services can assist in tagging large volumes of data efficiently. Additionally, we can employ AI models for initial rough classification of the data, allowing for a faster preliminary labeling phase. This approach can significantly reduce the amount of manual annotation required. Afterward, we can focus on manually annotating any misclassified samples, making it easier to refine the dataset without starting from scratch.
+
+### Training and Testing Procedure
+
+* Outline the training and testing procedure you would use for the model. Include
+  information on which metrics would be used to evaluate the model’s performance
+  and explain why these metrics are important for the task.
+
+  * The first step is to establish a clear training objective. Suspicious activity detection encompasses various topics, so it’s essential to specify the exact task the model will be used.
+  If a pre-trained model for the desired task is unavailable, it’s advisable to begin by training the model with publicly available large datasets that are closely aligned with the tasks at hand.
+  In our case, datasets like UCF101 [6] [7], NTURGB-D, and Kinetics [6] [7] can be used to train the model for general human action recognition. We can then acquire public datasets with actions more closely related to the specific task, such as UCFCrime [3] [4] or ShanghaiTech [5], which include video data of various abnormal activities like theft, loitering, and abuse.
+  It is always best to obtain real-time CCTV footage from the client, which can be annotated later to create a custom dataset. Ensure that the dataset includes a variety of scenes, featuring both normal and abnormal activities, to avoid overfitting the model to a single scenario.[2]
+  Instead of annotating from scratch, we can leverage AI models pre-trained for action recognition to initially annotate the data, then refine the labels for any misclassifications.
+  #### **Data Preprocessing:**
+  -  Extract frames from videos, resize them and normalize pixel values.
+  -  Apply augmentation techniques like random cropping, rotation, horizontal flipping, brightness adjustment, and motion blur to simulate various environmental conditions (e.g., changes in lighting or camera angles).
+  -  In practice, Human Action Recognition (HAR) systems may not always operate at high frame rates due to varying scenarios and camera configurations. Additionally, methods with higher latency might struggle to meet real-time constraints when frame rates are high. [1]
+  During frame extraction, videos can be downsampled to 30, 15, 6, or 3 frames per second (FPS).
+  #### **Model Selection:**
+  - Split the dataset into training, validation, and test sets (e.g., 70% for training, 15% for validation, and 15% for testing). For smaller datasets, training and validation splits can be used, or if a larger dataset is available, an 80/20 train-test split may be appropriate.
+  -	Define a clear training objective: for video-based HAR, this is to minimize the error between the recognized and true action labels.
+  For classification tasks (e.g., suspicious vs. non-suspicious activities), use categorical cross-entropy.
+  -	Use optimizers like Adam or SGD with scheduled learning rate decay to ensure efficient convergence.
+  -	Implement early stopping based on validation performance (e.g., stop training if validation loss doesn’t improve for a set number of epochs).
+  -	Use video clips or sequences of frames (e.g., 16-32 frames per clip) as input. Train the model with mini-batch gradient descent to handle larger datasets efficiently.
+  #### **Post-Training:**
+  -	Depending on the deployment platform, export the model in the appropriate format, such as PyTorch or ONNX.
+  -	Further optimize the model using techniques like quantization or pruning.
+  -	Utilize optimization tools such as TensorRT (for NVIDIA hardware) or OpenVINO (for Intel hardware) to accelerate inference.
+  -	Optimize the model for edge devices without sacrificing accuracy.
+  #### **Testing and Evaluation:**
+  Evaluation metrics are critical in suspicious activity recognition, as they provide an objective measure of the model's performance, helping to gauge its reliability and effectiveness for real-world deployment. Key metrics such as accuracy, precision, recall, and F1 score are important for evaluating how well the model detects actual threats while minimizing false alarms. Additionally, benchmark scores for accuracy and F1 score are useful for comparing models and understanding their expected performance.
+  #### Key Evaluation Metrics:
+  #### Accuracy:
+  **Definition:** The percentage of correctly identified activities (both suspicious and non-suspicious) out of the total activities.
+  **Importance:** While accuracy provides an overall measure of performance, it can be misleading in imbalanced datasets, where normal activities far outnumber suspicious ones.
+  **Example:** In a surveillance system, if 98% of activities are normal and only 2% are suspicious, a model could achieve 98% accuracy simply by classifying everything as normal, which isn’t helpful for detecting real threats.
+  #### Precision:
+  **Definition:** The proportion of true positives (correctly identified suspicious activities) out of all predicted suspicious activities.
+  **Importance:** High precision ensures that most flagged events are genuinely suspicious, reducing false positives, which is crucial for preventing unnecessary interventions.
+  **Example:** In a retail store, a high-precision model would minimize false alarms by not flagging regular shoppers as potential thieves.
+  Precision = True Positives (TP) / (True Positives (TP) + False Positives (FP))
+  •	Recall:
+  o	Definition: Recall (or sensitivity) measures the proportion of actual suspicious activities that the model correctly identifies.
+  o	Importance: High recall ensures the system detects most suspicious activities, minimizing false negatives (missed suspicious activities).
+  o	Example: In a public space, high recall is vital for identifying threats like theft or violence, even at the cost of a few false positives.
+  Recall = True Positives (TP) / (True Positives (TP) + False Negatives (FN))
+  •	F1 Score:
+  o	Definition: The harmonic mean of precision and recall, providing a balanced measure of the model’s performance.
+  o	Importance: Since suspicious activity detection requires balancing precision and recall, the F1 score is crucial for assessing overall performance in real-world scenarios.
+  F1 Score = 2 × (Precision × Recall) / (Precision + Recall)
+  o	Example: A surveillance system with a high F1 score would efficiently detect most threats while minimizing false alerts.
+  Focusing on the F1 score provides a balanced view of the model’s ability to perform well across different types of errors, while precision and recall highlight specific strengths and weaknesses.
+
 
