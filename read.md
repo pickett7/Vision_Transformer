@@ -12,8 +12,10 @@ customer’s desired detector is not readily available.
 * Describe the advantages and disadvantages of fine-tuning an off-the-shelf deep
   learning model compared to fully training a model from scratch for detecting
   suspicious activities in real-time on CCTV footage.
+  
   * Fine-tuning involves adapting a pre-trained model, initially trained on a large dataset, for a specific task. This process is commonly employed because the pre-trained model already comprehends the low-level features (such as edges, textures, and shapes in images) of the modality (such as text, images, or audio) it was trained on. Consequently, even with a very small dataset, the model can be effectively fine-tuned to perform well on a new task.
-    Advantages and Disadvantages of Fine-Tuning vs. Training from Scratch
+    
+    #### Advantages and Disadvantages of Fine-Tuning vs. Training from Scratch
     #### Fine-Tuning an Off-the-Shelf Model
     #### Advantages:
     -	Fine-tuning is particularly advantageous when working with a small dataset. Since the pre-trained model already understands basic features, it can adapt to the new task with less data [1]. This is especially beneficial if there is insufficient CCTV footage of suspicious activities.
@@ -35,7 +37,8 @@ customer’s desired detector is not readily available.
     #### Conclusion
     -	**Fine-Tuning:** Ideal for scenarios where computational resources and time are limited, and a suitable pre-trained model is available. It is particularly effective when the dataset is small or when rapid deployment is needed.
     -	**Training from Scratch:** Best suited for highly specific tasks where full customization is necessary, and sufficient computational resources and a large dataset are available.
-      For detecting suspicious activities on CCTV footage, fine-tuning an off-the-shelf model may provide a good balance between performance and practicality unless a very specific or novel type of suspicious activity requires a custom model from scratch.
+
+     	For detecting suspicious activities on CCTV footage, fine-tuning an off-the-shelf model may provide a good balance between performance and practicality unless a very specific or novel type of suspicious activity requires a custom model from scratch.
 
 #### References
 1.	[Fine-tuning vs From Scratch: Do Vision & Language Models Have Similar Capabilities?](https://aclanthology.org/2022.lrec-1.161/)
@@ -97,6 +100,32 @@ customer’s desired detector is not readily available.
 * Given that data to train the desired detector is not readily available, describe how you
   would put together a training dataset of sufficient size to train an off-the-shelf deep
   learning algorithm for suspicious activity detection.
+  * To create a training dataset for suspicious activity detection when data is not readily available, we can utilize multiple approaches such as transfer learning, synthetically generated data, and augmentation of available datasets.
+
+  #### Transfer Learning:
+    
+  We can leverage publicly available pre-trained models for general human activity detection as a baseline. This can significantly reduce the amount of data and computational resources required. Pretrained models, such as those based on popular architectures (e.g., ResNet, Inception) that have been trained on large datasets like UCF101, NTURGB-D, and Kinetics, can serve as a foundation for our model.
+  These datasets cover a wide range of human actions, providing the model with a solid understanding of general human behaviour. By using transfer learning, we can fine-tune these models to focus on the nuances of suspicious activities.
+
+  #### Fine-Tuning:
+  
+  After establishing a baseline model, we can fine-tune it using relevant datasets, such as the DCSAAS dataset, which is specifically designed for suspicious activity detection. This fine-tuning allows the model to learn specific patterns and behaviours that are indicative of suspicious activities, even when pre-existing data is limited.
+  Data Augmentation:
+  
+  To further enhance the training dataset, we can apply data augmentation techniques on existing datasets. This includes transformations such as flipping, rotating, scaling, and changing the brightness or contrast of the videos. By augmenting the available data, we can artificially increase the dataset's size and improve the model's robustness to variations.
+  Combining Data Sources:
+  
+  We can also incorporate publicly available videos from platforms like YouTube that showcase suspicious behaviours or similar activities. By carefully selecting and annotating these videos, we can enhance our dataset's diversity and relevance.
+
+  #### Iterative Learning:
+  
+  As the model is trained, we can iteratively refine the dataset by identifying and correcting misclassified samples. This will involve using the model to classify new data and manually reviewing any misclassified instances to improve the training dataset continuously.
+
+  #### Synthetic Data Generation:
+  
+  To address the lack of data, we can generate synthetic datasets that simulate various suspicious activities. Tools like Unity or Blender can be used to create realistic 3D environments where specific behaviors are enacted. This approach allows for the generation of diverse scenarios and conditions without privacy concerns.
+  By employing these strategies—synthetic data generation, transfer learning, fine-tuning with specific datasets, data augmentation, and iterative learning—we can create a comprehensive training dataset that is sufficiently large and varied to train an off-the-shelf deep learning algorithm for suspicious activity detection effectively.
+  
 
 * What factors affect the amount of data required for training the detector, and 
 how would you determine the necessary quantity?
@@ -138,11 +167,11 @@ how would you determine the necessary quantity?
   information on which metrics would be used to evaluate the model’s performance
   and explain why these metrics are important for the task.
 
-  * The first step is to establish a clear training objective. Suspicious activity detection encompasses various topics, so it’s essential to specify the exact task the model will be used.
-  If a pre-trained model for the desired task is unavailable, it’s advisable to begin by training the model with publicly available large datasets that are closely aligned with the tasks at hand.
-  In our case, datasets like UCF101 [6] [7], NTURGB-D, and Kinetics [6] [7] can be used to train the model for general human action recognition. We can then acquire public datasets with actions more closely related to the specific task, such as UCFCrime [3] [4] or ShanghaiTech [5], which include video data of various abnormal activities like theft, loitering, and abuse.
-  It is always best to obtain real-time CCTV footage from the client, which can be annotated later to create a custom dataset. Ensure that the dataset includes a variety of scenes, featuring both normal and abnormal activities, to avoid overfitting the model to a single scenario.[2]
-  Instead of annotating from scratch, we can leverage AI models pre-trained for action recognition to initially annotate the data, then refine the labels for any misclassifications.
+  *  The first step is to establish a clear training objective. Suspicious activity detection encompasses various topics, so it’s essential to specify the exact task the model will be used.
+  * If a pre-trained model for the desired task is unavailable, it’s advisable to begin by training the model with publicly available large datasets that are closely aligned with the tasks at hand.
+  * In our case, datasets like UCF101 [6] [7], NTURGB-D, and Kinetics [6] [7] can be used to train the model for general human action recognition. We can then acquire public datasets with actions more closely related to the specific task, such as UCFCrime [3] [4] or ShanghaiTech [5], which include video data of various abnormal activities like theft, loitering, and abuse.
+  * It is always best to obtain real-time CCTV footage from the client, which can be annotated later to create a custom dataset. Ensure that the dataset includes a variety of scenes, featuring both normal and abnormal activities, to avoid overfitting the model to a single scenario.[2]
+  * Instead of annotating from scratch, we can leverage AI models pre-trained for action recognition to initially annotate the data, then refine the labels for any misclassifications.
   #### **Data Preprocessing:**
   -  Extract frames from videos, resize them and normalize pixel values.
   -  Apply augmentation techniques like random cropping, rotation, horizontal flipping, brightness adjustment, and motion blur to simulate various environmental conditions (e.g., changes in lighting or camera angles).
@@ -164,36 +193,45 @@ how would you determine the necessary quantity?
   Evaluation metrics are critical in suspicious activity recognition, as they provide an objective measure of the model's performance, helping to gauge its reliability and effectiveness for real-world deployment. Key metrics such as accuracy, precision, recall, and F1 score are important for evaluating how well the model detects actual threats while minimizing false alarms. Additionally, benchmark scores for accuracy and F1 score are useful for comparing models and understanding their expected performance.
   #### Key Evaluation Metrics:
   #### Accuracy:
-  **Definition:** The percentage of correctly identified activities (both suspicious and non-suspicious) out of the total activities.
+  ##### **Definition:**
+  The percentage of correctly identified activities (both suspicious and non-suspicious) out of the total activities.
   
-  **Importance:** While accuracy provides an overall measure of performance, it can be misleading in imbalanced datasets, where normal activities far outnumber suspicious ones.
+  ##### **Importance:**
+  While accuracy provides an overall measure of performance, it can be misleading in imbalanced datasets, where normal activities far outnumber suspicious ones.
   
-  **Example:** In a surveillance system, if 98% of activities are normal and only 2% are suspicious, a model could achieve 98% accuracy simply by classifying everything as normal, which isn’t helpful for detecting real threats.
+  ##### **Example:**
+  In a surveillance system, if 98% of activities are normal and only 2% are suspicious, a model could achieve 98% accuracy simply by classifying everything as normal, which isn’t helpful for detecting real threats.
   
   #### Precision:
-  **Definition:** The proportion of true positives (correctly identified suspicious activities) out of all predicted suspicious activities.
-  
-  **Importance:** High precision ensures that most flagged events are genuinely suspicious, reducing false positives, which is crucial for preventing unnecessary interventions.
-  
-  **Example:** In a retail store, a high-precision model would minimize false alarms by not flagging regular shoppers as potential thieves.
+  ##### **Definition:**
+  The proportion of true positives (correctly identified suspicious activities) out of all predicted suspicious activities.  
+  ##### **Importance:**
+  High precision ensures that most flagged events are genuinely suspicious, reducing false positives, which is crucial for preventing unnecessary interventions.  
+  ##### **Example:**
+  In a retail store, a high-precision model would minimize false alarms by not flagging regular shoppers as potential thieves.
   
          Precision = True Positives (TP) / (True Positives (TP) + False Positives (FP))
   #### Recall:
-  **Definition:** Recall (or sensitivity) measures the proportion of actual suspicious activities that the model correctly identifies.
-  
-  **Importance:** High recall ensures the system detects the most suspicious activities, minimizing false negatives (missed suspicious activities).
-  
-  **Example:** In a public space, high recall is vital for identifying threats like theft or violence, even at the cost of a few false positives.
+  ##### **Definition:**
+  Recall (or sensitivity) measures the proportion of actual suspicious activities that the model correctly identifies.  
+  ##### **Importance:**
+  High recall ensures the system detects the most suspicious activities, minimizing false negatives (missed suspicious activities).  
+  ##### **Example:**
+  In a public space, high recall is vital for identifying threats like theft or violence, even at the cost of a few false positives.
   
          Recall = True Positives (TP) / (True Positives (TP) + False Negatives (FN))
-  #### F1 Score:
-  **Definition:** The harmonic mean of precision and recall, providing a balanced measure of the model’s performance.
   
-  **Importance:** Since suspicious activity detection requires balancing precision and recall, the F1 score is crucial for assessing overall performance in real-world scenarios.
+  #### F1 Score:
+  ##### **Definition:**
+  The harmonic mean of precision and recall, providing a balanced measure of the model’s performance.
+  
+  ##### **Importance:**
+  Since suspicious activity detection requires balancing precision and recall, the F1 score is crucial for assessing overall performance in real-world scenarios.
   
          F1 Score = 2 × (Precision × Recall) / (Precision + Recall)
   
-  **Example:** A surveillance system with a high F1 score would efficiently detect most threats while minimizing false alerts.
+  ##### **Example:**
+  A surveillance system with a high F1 score would efficiently detect most threats while minimizing false alerts.
 
   Focusing on the F1 score provides a balanced view of the model’s ability to perform well across different types of errors, while precision and recall highlight specific strengths and weaknesses.
 
